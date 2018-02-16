@@ -1,2 +1,0 @@
-serviceClass: com.order.match.client.GreetingService
-path: DB8A744AF8CF7F94B55F71B39474F593.gwt.rpc
