@@ -36,7 +36,7 @@ public class FieldVerifier {
 	
 	
 	public static boolean isNotANumber(String number) {
-		if (number == null || number.isEmpty()) {
+		if (number == null || number.isEmpty() || number.length()>5) {
 			return true;
 		}
 		

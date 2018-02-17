@@ -1,5 +1,6 @@
 package com.order.match.client;
 
+import java.util.Comparator;
 import java.util.List;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -12,6 +13,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -20,6 +22,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.view.client.ListDataProvider;
 import com.order.match.shared.FieldVerifier;
+import com.sun.corba.se.pept.transport.ContactInfo;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -40,6 +43,7 @@ public class OrderMatch implements EntryPoint {
 			.create(OrderService.class);
 	
 	private CellTable<Order> buyTable = new CellTable<Order>();
+	private TextColumn<Order> buyColumn;
 //	private CellTable<String> sellTable = new CellTable<String>();
 	/**
 	 * This is the entry point method.
@@ -58,7 +62,7 @@ public class OrderMatch implements EntryPoint {
 		// We can add style names to widgets
 		buyButton.addStyleName("sendButton");
 
-		final TextColumn<Order> buyColumn = new TextColumn<Order>() {
+		buyColumn = new TextColumn<Order>() {
 
 			@Override
 			public String getValue(Order object) {
@@ -102,6 +106,8 @@ public class OrderMatch implements EntryPoint {
 		buyTable.addColumn(sellColumn,safe);
 		RootPanel.get("buyTable").add(buyTable);
 //		RootPanel.get("sellTable").add(sellTable);
+//		orderLbl.setText(" ");
+//		tradeLbl.setText(" ");
 		RootPanel.get("orderLabelContainer").add(orderLbl);
 		RootPanel.get("tradeLabelContainer").add(tradeLbl);
 
@@ -257,38 +263,21 @@ public class OrderMatch implements EntryPoint {
 			            for (Order order : result) {
 			                list.add(order);
 			            }
-
+//			            ListHandler<Order> listHandler = new ListHandler<Order>(list);
+//
+//			            listHandler.setComparator(buyColumn, new Comparator<Order>() {
+//
+//			                
+//			                public int compare(Order o1, Order o2) {
+//			                    return o1.getBuy().compareTo(o2.getBuy());
+//			                }
+//			            });
+//
+//			            buyTable.addColumnSortHandler(listHandler);
 			            
 						
 					}
 				});
 	}
-//	public void getSellOrders(){
-//		orderService.getSellOrders(
-//				new AsyncCallback<List<String>>() {
-//					public void onFailure(Throwable caught) {
-//						
-//
-//					}
-//
-//					public void onSuccess(List<String> result) {
-//
-//						sellTable.setRowCount(result.size());
-//
-//			            ListDataProvider<String> dataProvider = new ListDataProvider<String>();
-//			            dataProvider.addDataDisplay(sellTable);
-//
-//			            List<String> list = dataProvider.getList();
-//			            for (String String : result) {
-//			                list.add(String);
-//			            }
-//
-//			            ListHandler<String> listHandler = new ListHandler<String>(result);
-//
-//			            
-//			            sellTable.addColumnSortHandler(listHandler);
-//						
-//					}
-//				});
-//	}
+
 }

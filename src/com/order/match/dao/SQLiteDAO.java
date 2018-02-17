@@ -18,9 +18,9 @@ public class SQLiteDAO {
 	         stmt = c.createStatement();
 	         String sql = "CREATE TABLE ORDERS" +
 	                        "(ID INT PRIMARY KEY     NOT NULL," +
-	                        " ORDERS INT    NOT NULL, " + 
-	                        " QUANTITY        INT NOT NULL, " + 
-	                        " PRICE         INT NOT NULL, " +
+	                        " ORDERS TEXT    NOT NULL, " + 
+	                        " QUANTITY        TEXT NOT NULL, " + 
+	                        " PRICE         TEXT NOT NULL, " +
 	                        "DATETIME TEXT   )"; 
 	         
 
