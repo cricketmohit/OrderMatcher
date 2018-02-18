@@ -1,2 +1,3 @@
 # Module ordermatch
 # RPC service class, partial path of RPC policy file
+com.order.match.client.OrderService, A26941656F9591660F50A57C49D39A21.gwt.rpc

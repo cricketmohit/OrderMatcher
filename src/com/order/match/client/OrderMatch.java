@@ -36,7 +36,7 @@ public class OrderMatch implements EntryPoint {
 			+ "connection and try again.";
 
 	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
+	 * Create a remote service proxy to talk to the server-side Order service.
 	 */
 	private final OrderServiceAsync orderService = GWT
 			.create(OrderService.class);
@@ -52,17 +52,12 @@ public class OrderMatch implements EntryPoint {
 		final Button buyButton = new Button("BUY");
 		final Button sellButton = new Button("SELL");
 		final HTML tradeLbl = new HTML();
-		
-//		final Label tradeLbl = new Label();
 		final Label orderLbl = new Label();
 		final TextBox volumeField = new TextBox();
 		final TextBox priceField = new TextBox();
-
 		final Label errorLabel = new Label();
 
-		// We can add style names to widgets
 		buyButton.addStyleName("sendButton");
-
 		buyColumn = new TextColumn<Order>() {
 
 			@Override
@@ -73,21 +68,17 @@ public class OrderMatch implements EntryPoint {
 		buyTable.setTableLayoutFixed(true);
 		buyTable.setWidth("100%", true);
 		buyTable.setColumnWidth(buyColumn, 50, Unit.PCT);
-		
 		buyColumn.setSortable(true);
 		SafeHtml header = new SafeHtml() {
-			
 			public String asString() {
 				// TODO Auto-generated method stub
 				return "BuyOrder";
 			}
 		};
-		
 		buyTable.addColumn(buyColumn,header);
 		buyTable.addColumnStyleName(0,"grey" );
 		buyTable.addColumnStyleName(1,"grey" );	
 		buyTable.setStyleName("grey");
-//		buyTable.getRowElement(index).addClassName("redBackground");
 		final TextColumn<Order> sellColumn = new TextColumn<Order>() {
 
 			@Override
@@ -96,7 +87,6 @@ public class OrderMatch implements EntryPoint {
 			}
 		};
 		SafeHtml safe = new SafeHtml() {
-			
 			public String asString() {
 				// TODO Auto-generated method stub
 				return "Sell Orders";
@@ -111,23 +101,16 @@ public class OrderMatch implements EntryPoint {
 //		tradeLbl.setText(" ");
 		RootPanel.get("orderLabelContainer").add(orderLbl);
 		RootPanel.get("tradeLabelContainer").add(tradeLbl);
-
 		RootPanel.get("volumeFieldContainer").add(volumeField);
 		RootPanel.get("priceFieldContainer").add(priceField);
 		RootPanel.get("buyButtonContainer").add(buyButton);
 		RootPanel.get("sellButtonContainer").add(sellButton);
-
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 
-		// Focus the cursor on the name field when the app loads
+		// Focus the cursor on the quanity field when the app loads
 		volumeField.setFocus(true);
 		volumeField.selectAll();
 		getOrders();
-//		getSellOrders();
-		
-		// Create the Table
-
-		// Create a handler for the sellButton
 		class SellHandler implements ClickHandler, KeyUpHandler {
 			/**
 			 * Fired when the user clicks on the sendButton.
@@ -262,7 +245,7 @@ public class OrderMatch implements EntryPoint {
 				new AsyncCallback<List<Order>>() {
 					public void onFailure(Throwable caught) {
 						
-
+						System.out.println(caught.getMessage());
 					}
 
 					public void onSuccess(List<Order> result) {
@@ -276,19 +259,6 @@ public class OrderMatch implements EntryPoint {
 			            for (Order order : result) {
 			                list.add(order);
 			            }
-//			            ListHandler<Order> listHandler = new ListHandler<Order>(list);
-//
-//			            listHandler.setComparator(buyColumn, new Comparator<Order>() {
-//
-//			                
-//			                public int compare(Order o1, Order o2) {
-//			                    return o1.getBuy().compareTo(o2.getBuy());
-//			                }
-//			            });
-//
-//			            buyTable.addColumnSortHandler(listHandler);
-			            
-						
 					}
 				});
 	}
