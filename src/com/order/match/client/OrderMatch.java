@@ -95,10 +95,8 @@ public class OrderMatch implements EntryPoint {
 		buyTable.setColumnWidth(sellColumn, 50, Unit.PCT);
 		sellColumn.setSortable(true);
 		buyTable.addColumn(sellColumn,safe);
+		buyTable.addColumnStyleName(0, "grey");
 		RootPanel.get("buyTable").add(buyTable);
-//		RootPanel.get("sellTable").add(sellTable);
-//		orderLbl.setText(" ");
-//		tradeLbl.setText(" ");
 		RootPanel.get("orderLabelContainer").add(orderLbl);
 		RootPanel.get("tradeLabelContainer").add(tradeLbl);
 		RootPanel.get("volumeFieldContainer").add(volumeField);

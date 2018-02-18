@@ -42,8 +42,6 @@ public class OrderDaoImpl  {
 	         stmt.close();
 	         c.close();
 	      } catch ( Exception e ) {
-	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	         System.exit(0);
 	      }
 	      System.out.println("Tables created successfully");
 	   
