@@ -93,14 +93,12 @@ public class OrderServiceImpl extends RemoteServiceServlet implements
 	public String sendBuyDetails(String volume, String price)
 			throws IllegalArgumentException {
 		OrderDaoImpl impl = new OrderDaoImpl();
-		impl.sendBuyDetails(volume,price); 
-		return "Order matched !!!";
+		return impl.sendBuyDetails(volume,price);
 	}
 
 	public String sendSellDetails(String volume, String price)
 			throws IllegalArgumentException {
 		OrderDaoImpl impl = new OrderDaoImpl();
-		impl.sendSellDetails(volume,price); 
-		return "Order matched !!";
+		return impl.sendSellDetails(volume,price); 
 	}
 }

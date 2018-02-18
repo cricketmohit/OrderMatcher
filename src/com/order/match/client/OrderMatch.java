@@ -1,6 +1,5 @@
 package com.order.match.client;
 
-import java.util.Comparator;
 import java.util.List;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -13,7 +12,6 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -22,7 +20,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.view.client.ListDataProvider;
 import com.order.match.shared.FieldVerifier;
-import com.sun.corba.se.pept.transport.ContactInfo;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -167,16 +164,17 @@ public class OrderMatch implements EntryPoint {
 				orderService.sendSellDetails(volume, price,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
-								// Show the RPC error message to the user
+								errorLabel.setText(caught.getLocalizedMessage());
 
 							}
 
 							public void onSuccess(String result) {
 								orderLbl.setText("Order matched!!!");
-								tradeLbl.setText("Mohit");
-								// resultListStore = new ListStore<ResultRow>();
-								// resultListStore.add(result);
-
+								tradeLbl.setText(result);
+								volumeField.setText("");
+								priceField.setText("");
+								volumeField.setFocus(true);
+								getOrders();
 							}
 						});
 			}
@@ -223,15 +221,18 @@ public class OrderMatch implements EntryPoint {
 				orderService.sendBuyDetails(volume, price,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
-								// Show the RPC error message to the user
+								errorLabel.setText(caught.getLocalizedMessage());
 
 							}
 
 							public void onSuccess(String result) {
 								orderLbl.setText("Order matched!!!");
-								tradeLbl.setText("Trade");
-								// resultListStore = new ListStore<ResultRow>();
-								// resultListStore.add(result);
+								tradeLbl.setText(result);
+								volumeField.setText("");
+								priceField.setText("");
+								getOrders();
+								volumeField.setFocus(true);
+								
 							}
 						});
 			}
