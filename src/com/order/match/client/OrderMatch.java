@@ -11,10 +11,12 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -49,7 +51,9 @@ public class OrderMatch implements EntryPoint {
 
 		final Button buyButton = new Button("BUY");
 		final Button sellButton = new Button("SELL");
-		final Label tradeLbl = new Label();
+		final HTML tradeLbl = new HTML();
+		
+//		final Label tradeLbl = new Label();
 		final Label orderLbl = new Label();
 		final TextBox volumeField = new TextBox();
 		final TextBox priceField = new TextBox();
@@ -169,8 +173,12 @@ public class OrderMatch implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
+								if(result!=null && !result.isEmpty()){
 								orderLbl.setText("Order matched!!!");
-								tradeLbl.setText(result);
+								}else{
+									orderLbl.setText("");
+								}
+								tradeLbl.setHTML(new SafeHtmlBuilder().appendEscapedLines(result).toSafeHtml());
 								volumeField.setText("");
 								priceField.setText("");
 								volumeField.setFocus(true);
@@ -226,8 +234,12 @@ public class OrderMatch implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
+								if(result!=null && !result.isEmpty()){
 								orderLbl.setText("Order matched!!!");
-								tradeLbl.setText(result);
+								}else{
+									orderLbl.setText("");
+								}
+								tradeLbl.setHTML(new SafeHtmlBuilder().appendEscapedLines(result).toSafeHtml());
 								volumeField.setText("");
 								priceField.setText("");
 								getOrders();

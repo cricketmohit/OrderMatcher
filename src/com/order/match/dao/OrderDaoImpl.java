@@ -352,14 +352,14 @@ public class OrderDaoImpl  {
 				if(buy.getQuantity()>Integer.valueOf(sellQuantity)){
 					buy.setQuantity(buy.getQuantity()-Integer.valueOf(sellQuantity));
 					updateQuantity(buy);
-					return result+"\n"+"TRADE "+ sellQuantity+"@"+price;
+					return result+"TRADE "+ sellQuantity+"@"+price+"\n";
 				} else if(buy.getQuantity()==Integer.valueOf(sellQuantity)){
 					removeQuantity(buy);
-					return result+"\n"+"TRADE "+ sellQuantity+"@"+price;
+					return result+"TRADE "+ sellQuantity+"@"+price+"\n";
 				}else{
 					sellQuantity=String.valueOf(Integer.valueOf(sellQuantity)-buy.getQuantity());
 					removeQuantity(buy);
-					result=result+"\n"+"TRADE "+ buy.getQuantity()+"@"+price;
+					result=result+"TRADE "+ buy.getQuantity()+"@"+price+"\n";
 				}
 			}
 			insertSellDetails(sellQuantity,price);
@@ -436,19 +436,18 @@ public class OrderDaoImpl  {
 		List<Orders> sellDetails = getSellDetails(price); 
 		String result="";
 		if(sellDetails.size()>0){
-			
 			for (Orders sell : sellDetails) {
 				if(sell.getQuantity()>Integer.valueOf(buyQuantity)){
 					sell.setQuantity(sell.getQuantity()-Integer.valueOf(buyQuantity));
 					updateQuantity(sell);
-					return result+"\n"+"TRADE "+ buyQuantity+"@"+sell.price;
+					return result+"TRADE "+ buyQuantity+"@"+sell.price+"\n";
 				} else if(sell.getQuantity()==Integer.valueOf(buyQuantity)){
 					removeQuantity(sell);
-					return result+"\n"+"TRADE "+ buyQuantity+"@"+sell.price;
+					return result+"TRADE "+ buyQuantity+"@"+sell.price+"\n";
 				}else{
 					buyQuantity=String.valueOf(Integer.valueOf(buyQuantity)-sell.getQuantity());
 					removeQuantity(sell);
-					result=result+"\n"+"TRADE "+ sell.getQuantity()+"@"+sell.price;
+					result=result+"TRADE "+ sell.getQuantity()+"@"+sell.price+"\n";
 				}
 			}
 			insertBuyDetails(buyQuantity,price);
